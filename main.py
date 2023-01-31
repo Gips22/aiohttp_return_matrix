@@ -3,6 +3,8 @@ from typing import List
 import aiohttp
 import asyncio
 
+from exeptions import MatrixNotSquare
+
 
 async def get_matrix(url: str) -> List[int]:
     async with aiohttp.ClientSession() as session:
@@ -21,14 +23,16 @@ async def get_matrix(url: str) -> List[int]:
                             row.append(int(j))
                     if row:
                         matrix.append(row)
-            f = traverse_matrix(matrix)
+            if not _check_matrix_is_square(matrix):
+                raise MatrixNotSquare
+            f = _traverse_matrix_union_list(matrix)
             print(f)
 
 
 
 
 
-def traverse_matrix(matrix: List[list[int]], new_matrix: list[int]=None) -> List[int]:
+def _traverse_matrix_union_list(matrix: List[list[int]], new_matrix: list[int]=None) -> List[int]:
     if not new_matrix:
         new_matrix = []
 
@@ -42,7 +46,7 @@ def traverse_matrix(matrix: List[list[int]], new_matrix: list[int]=None) -> List
 
     matrix = list(zip(*matrix[::-1]))
     new_matrix.append(matrix[0][::-1])
-    traverse_matrix(matrix[1:], new_matrix)
+    return _traverse_matrix_union_list(matrix[1:], new_matrix)
 
 
 
@@ -51,8 +55,9 @@ def traverse_matrix(matrix: List[list[int]], new_matrix: list[int]=None) -> List
 
 
 
-def check_matrix_is_square(matrix):
-    len_row = matrix[0]
+
+def _check_matrix_is_square(matrix):
+    len_row = len(matrix[0])
     return len_row == len(matrix)
 
 
