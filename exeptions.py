@@ -1,2 +1,0 @@
-class MatrixNotSquare(Exception):
-    pass
