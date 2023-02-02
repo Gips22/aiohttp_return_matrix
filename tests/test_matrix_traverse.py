@@ -43,8 +43,9 @@ def test_traverse_matrix_to_list():
     assert _traverse_matrix_to_list(ORIGINAL_MATRIX, new_matrix) == TRAVERSAL
 
 
-def test_check_matrix_is_square():
-    matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    assert _check_matrix_is_square(matrix) == True
-    matrix = [[1, 2, 3], [4, 5, 6]]
-    assert _check_matrix_is_square(matrix) == False
+@pytest.mark.parametrize("matrix,expected", [
+    ([[1, 2, 3], [4, 5, 6], [7, 8, 9]], True),
+    ([[1, 2, 3], [4, 5, 6]], False),
+])
+def test_check_matrix_is_square(matrix, expected):
+    assert _check_matrix_is_square(matrix) == expected
