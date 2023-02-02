@@ -4,7 +4,7 @@ import aiohttp
 import asyncio
 from loguru import logger
 
-from exeptions import MatrixNotSquare, ClientSideErrors, ServerSideErrors
+from exceptions import MatrixNotSquare, ClientSideErrors, ServerSideErrors
 
 logger.add("debug.log", format="{time} {level} {message}", level="DEBUG", rotation="10 MB")
 
