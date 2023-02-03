@@ -1,3 +1,4 @@
+"""Основной модуль приложения"""
 from typing import List
 
 import aiohttp
@@ -10,7 +11,7 @@ logger.add("debug.log", format="{time} {level} {message}", level="DEBUG", rotati
 
 
 async def get_matrix(url: str) -> List[int]:
-    """Основная функция для клиента, которая возвращает финальный List[int]"""
+    """Основная функция, которая создает aiohttp клиента и возвращает финальный List[int]"""
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             logger.debug(f"Status: {response.status}")

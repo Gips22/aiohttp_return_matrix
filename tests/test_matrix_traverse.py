@@ -1,3 +1,4 @@
+"""Модуль с тестами"""
 import exceptions
 import asyncio
 
